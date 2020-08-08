@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide&display=swap');
+
+h1, h2, h3, h4, h5 {
+	font-family: 'Audiowide';
+	padding: 6px
+}
+
+div {
+	font-family: 'Audiowide';
+}
+
+table {
+	border-collapse: separate;
+	border-spacing: 3px 15px
+}
+
+tr {
+	padding: 3px
+}
+
+td {
+	font-size: 20px;
+}
+
+div.sheet-sec {
+	font: 15px;
+	background-color: lightgrey;
+	border-style: double;
+	border-color: black;
+	text-align: center;
+}
+
+div.sheet-sec-name-column {
+	float: left;
+	font: 15px;
+	background-color: lightgrey;
+	border-style: double;
+	border-color: black;
+	text-align: center;
+	min-height: 166px;
+}
+
+div.sheet-sec-column {
+	float: left;
+	font: 15px;
+	background-color: lightgrey;
+	border-style: double;
+	border-color: black;
+	text-align: center;
+}
+
+input.sheet-name_field {
+	text-align: center;
+	font-family: 'Audiowide';
+	border:none;
+	border-bottom: 1px solid black;
+	outline: none;
+	background-color: white;
+	font-size: 22px;
+	padding: 10px
+}
+
+input.sheet-text_field {
+	text-align: center;
+	font-family: 'Audiowide';
+	border:none;
+	border-bottom: 1px solid black;
+	outline: none;
+	background: white;
+	font-size: 18px
+}
+
+table.sheet-stats {
+	float: left;
+	background-color: lightgrey;
+	border-style: double;
+	border-color: black;
+	text-align: center;
+}
+
+td.sheet-stats_block {
+	border: 2px solid black;
+	background-color: white;
+	font-size: 12px;
+}
+
+input.sheet-stat_field {
+	text-align: center;
+	font-family: 'Audiowide';
+	border: 1px solid black;
+	background: white;
+	font-size: 16px;
+	max-width: 50px;
+}
+
+td.sheet-saving_throws {
+	background-color: lightgrey;
+	border-style: double;
+	border-color: black;
+	text-align: center;
+	font-size: 18px
+}
+

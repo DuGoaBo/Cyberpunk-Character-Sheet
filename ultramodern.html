@@ -1,0 +1,126 @@
+<div class="sec">
+	<img src="https://raw.githubusercontent.com/Magus-Sayj/Cyberpunk-Character-Sheet/master/cyberpunk5e.png">
+</div>
+<div>
+	<div class="sec-name-column">
+			<input type="text" name="attr_character_name" class="name_field">
+			</input><br>
+			<h2>
+				Character Name
+			</h2>
+	</div>
+	<div class="sec-column">
+		<table>
+			<tr>
+				<td>
+					<input type="text" name="attr_creature_type" class="text_field">
+					</input><br>
+					Creature Type
+				</td>
+				<td>
+					<input type="text" name="attr_class" class="text_field">
+					</input><br>
+					Class
+				</td>
+				<td>
+					<input type="text" name="attr_level" class="text_field">
+					</input><br>
+					Level
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="attr_ladder" class="text_field">
+					</input><br>
+					Ladder
+				</td>
+				<td>
+					<input type="text" name="attr_archetype" class="text_field">
+					</input><br>
+					Archetype
+				</td>
+				<td>
+					<input type="text" name="attr_alignment" class="text_field">
+					</input><br>
+					Alignment
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+<!ROW 2>
+<div>
+	<table class="stats">
+		<tr>
+			<td class="stats_block">
+				STR<br>
+				<input type="number" name="attr_strength" class="stat_field">
+				</input><br>
+				<input type="number" name="attr_strength_mod" class="stat_field"
+				value="floor((@{strength} - 10)/2)" disabled="true" />
+			</td>
+		</tr>
+		<tr>
+			<td class="stats_block">
+				DEX<br>
+				<input type="number" name="attr_dexterity" class="stat_field">
+				</input><br>
+				<input type="number" name="attr_dexterity_mod" class="stat_field"
+				value="floor((@{dexterity} - 10)/2)" disabled="true" />
+			</td>
+		</tr>
+		<tr>
+			<td class="stats_block">
+				CON<br>
+				<input type="number" name="attr_constitution" class="stat_field">
+				</input><br>
+				<input type="number" name="attr_constitution_mod" class="stat_field"
+				value="floor((@{constitution} - 10)/2)" disabled="true" />
+			</td>
+		</tr>
+		<tr>
+			<td class="stats_block">
+				INT<br>
+				<input type="number" name="attr_intelligence" class="stat_field">
+				</input><br>
+				<input type="number" name="attr_intelligence_mod" class="stat_field"
+				value="floor((@{intelligence} - 10)/2)" disabled="true" />
+			</td>
+		</tr>
+		<tr>
+			<td class="stats_block">
+				WIS<br>
+				<input type="number" name="attr_wisdom" class="stat_field">
+				</input><br>
+				<input type="number" name="attr_wisdom_mod" class="stat_field"
+				value="floor((@{wisdom} - 10)/2)" disabled="true" />
+			</td>
+		</tr>
+		<tr>
+			<td class="stats_block">
+				CHR<br>
+				<input type="number" name="attr_charisma" class="stat_field">
+				</input><br>
+				<input type="number" name="attr_charisma_mod" class="stat_field"
+				value="floor((@{charisma} - 10)/2)" disabled="true" />
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td class="saving_throws">
+				<h4>
+					Saving Throws
+				</h4>
+			</td>
+		</tr>
+		<tr>
+			<td class="saving_throws">
+				<h4>
+					Skills
+				</h4>
+			</td>
+		</tr>
+	</table>
+</div>
