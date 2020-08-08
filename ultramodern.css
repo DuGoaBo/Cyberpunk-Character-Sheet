@@ -2,7 +2,7 @@
 
 h1, h2, h3, h4, h5 {
 	font-family: 'Audiowide';
-	padding: 6px
+	padding: 6px;
 }
 
 div {
@@ -32,12 +32,23 @@ div.sheet-sec {
 
 div.sheet-sec-name-column {
 	float: left;
+	font: 13px;
+	background-color: lightgrey;
+	border-style: double;
+	border-color: black;
+	text-align: center;
+	min-height: 130px;
+}
+
+div.sheet-sec-definer-column {
+	float: right;
 	font: 15px;
 	background-color: lightgrey;
 	border-style: double;
 	border-color: black;
 	text-align: center;
-	min-height: 166px;
+	min-height: 150px;
+	max-width: 650px
 }
 
 div.sheet-sec-column {
@@ -56,8 +67,7 @@ input.sheet-name_field {
 	border-bottom: 1px solid black;
 	outline: none;
 	background-color: white;
-	font-size: 22px;
-	padding: 10px
+	font-size: 18px;
 }
 
 input.sheet-text_field {
@@ -67,7 +77,8 @@ input.sheet-text_field {
 	border-bottom: 1px solid black;
 	outline: none;
 	background: white;
-	font-size: 18px
+	font-size: 18px;
+	max-width: 200px
 }
 
 table.sheet-stats {
@@ -91,13 +102,44 @@ input.sheet-stat_field {
 	background: white;
 	font-size: 16px;
 	max-width: 50px;
+	padding: 3px
 }
 
-td.sheet-saving_throws {
+table.sheet-saving_throws_and_skills {
+	float: left;
+	min-width: 200px
+}
+
+td.sheet-saving_throws_and_skills {
 	background-color: lightgrey;
 	border-style: double;
 	border-color: black;
 	text-align: center;
-	font-size: 18px
+	font-size: 18px;
+	min-width: 300px
 }
 
+input[type="checkbox"] {
+	filter: grayscale(1);
+}
+
+ul {
+	text-align: center;
+	float: left
+}
+
+li {
+	font-size: 15px;
+	list-style: none;
+	padding: 10px;
+	align: left
+}
+
+button.sheet-check {
+	background: none;
+	background-image: none;
+	border: none;
+	max-height: 10px;
+	max-width: 10px;
+	content: "l";
+}
