@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Audiowide&display=swap');
 
 h1, h2, h3, h4, h5 {
-	font-family: 'Audiowide';
 	padding: 6px;
 	text-align: center
 }
 
-div {
-	font-family: 'Audiowide';
+* {
+	font-family: "Audiowide"
 }
 
 table {
@@ -17,6 +16,25 @@ table {
 
 td {
 	font-size: 15px;
+}
+
+td.sheet-logo {
+	background-color: lightgrey;
+	border-style: double;
+	text-align: center;
+	min-width: 1000px
+}
+
+td.sheet-character_name {
+	background-color: lightgrey;
+	border-style: double;
+	text-align: center;
+}
+
+td.sheet-definers {
+	background-color: lightgrey;
+	border-style: double;
+	text-align: center;
 }
 
 div.sheet-sec {
@@ -148,7 +166,7 @@ button.sheet-initiative {
 	font-weight: bold;
 }
 
-div.sheet-passive_perception {
+td.sheet-passive_perception {
 	border: double black;
 	background-color: lightgrey;
 	align: left;
@@ -219,4 +237,5 @@ button.sheet-attackbutton {
 	min-width: 30px;
 	min-height: 30px;
 	border: 2px solid red;
+	font-family: "Audiowide";
 }
