@@ -40,9 +40,9 @@
 						Archetype
 					</td>
 					<td>
-						<input type="text" name="attr_alignment" class="text_field">
+						<input type="text" name="attr_lifepath" class="text_field">
 						</input><br>
-						Alignment
+						Lifepath
 					</td>
 				</tr>
 			</table>
@@ -57,8 +57,8 @@
 					STR<br>
 					<input type="number" name="attr_strength" class="stat_field">
 					</input><br>
-					<input type="number" name="attr_strength_mod" class="stat_field"
-					value="floor((@{strength} - 10)/2)" disabled="true" />
+					<input type="number" name="attr_strength_mod_display"
+						value="@{strength_mod}" class="stat_field" disabled="true" />
 				</td>
 			</tr>
 			<tr>
@@ -66,8 +66,8 @@
 					DEX<br>
 					<input type="number" name="attr_dexterity" class="stat_field">
 					</input><br>
-					<input type="number" name="attr_dexterity_mod" class="stat_field"
-					value="floor((@{dexterity} - 10)/2)" disabled="true" />
+					<input type="number" name="attr_dexterity_mod_display" class="stat_field"
+					value="@{dexterity_mod}" disabled="true" />
 				</td>
 			</tr>
 			<tr>
@@ -75,8 +75,8 @@
 					CON<br>
 					<input type="number" name="attr_constitution" class="stat_field">
 					</input><br>
-					<input type="number" name="attr_constitution_mod" class="stat_field"
-					value="floor((@{constitution} - 10)/2)" disabled="true" />
+					<input type="number" name="attr_constitution_mod_display" class="stat_field"
+					value="@{constitution_mod}" disabled="true" />
 				</td>
 			</tr>
 			<tr>
@@ -84,8 +84,8 @@
 					INT<br>
 					<input type="number" name="attr_intelligence" class="stat_field">
 					</input><br>
-					<input type="number" name="attr_intelligence_mod" class="stat_field"
-					value="floor((@{intelligence} - 10)/2)" disabled="true" />
+					<input type="number" name="attr_intelligence_mod_display" class="stat_field"
+					value="@{intelligence_mod}" disabled="true" />
 				</td>
 			</tr>
 			<tr>
@@ -93,8 +93,8 @@
 					WIS<br>
 					<input type="number" name="attr_wisdom" class="stat_field">
 					</input><br>
-					<input type="number" name="attr_wisdom_mod" class="stat_field"
-					value="floor((@{wisdom} - 10)/2)" disabled="true" />
+					<input type="number" name="attr_wisdom_mod_display" class="stat_field"
+					value="@{wisdom_mod}" disabled="true" />
 				</td>
 			</tr>
 			<tr>
@@ -102,26 +102,27 @@
 					CHR<br>
 					<input type="number" name="attr_charisma" class="stat_field">
 					</input><br>
-					<input type="number" name="attr_charisma_mod" class="stat_field"
-					value="floor((@{charisma} - 10)/2)" disabled="true" />
+					<input type="number" name="attr_charisma_mod_display" class="stat_field"
+					value="@{charisma_mod}" disabled="true" />
 				</td>
 			</tr>
 		</table>
 		<table class="saving_throws_and_skills">
 			<tr>
 				<td class="saving_throws_and_skills">
-					<h4>
+					<h3>
 						Saving Throws
-					</h4>
+					</h3>
 					<ul>
 						<li>
 							<input type="checkbox" name="attr_strength_save_proficiency"
-								value="1"
-								class="has_proficiency"/>
-							<input type="number" name="attr_strength_save" class="stat_field"
-							value="@{strength_mod} + @{strength_save_proficiency}*3"
+								value="1" class="has_proficiency"/>
+							<input type="number" name="attr_strength_save"
+								class="stat_field"
+							value="@{strength_mod} +
+									@{strength_save_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/>
-							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Strength Saving Throw=[[1d20 + @{strength_mod}]]}}">
+							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Strength Saving Throw=[[1d20 + @{strength_save}]]}}">
 							STR </button>
 						</li>
 						<li>
@@ -129,9 +130,9 @@
 								value="1"
 								class="has_proficiency"/>
 							<input type="number" name="attr_dexterity_save" class="stat_field"
-							value="@{dexterity_mod} + @{dexterity_save_proficiency}*3"
+							value="@{dexterity_mod} + @{dexterity_save_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/>
-							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Dexterity Saving Throw=[[1d20 + @{dexterity_mod}]]}}">
+							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Dexterity Saving Throw=[[1d20 + @{dexterity_save}]]}}">
 							DEX </button>
 						</li>
 						<li>
@@ -139,9 +140,9 @@
 								value="1"
 								class="has_proficiency"/>
 							<input type="number" name="attr_constitution_save" class="stat_field"
-							value="@{constitution_mod} + @{constitution_save_proficiency}*3"
+							value="@{constitution_mod} + @{constitution_save_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/>
-							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Constitution Saving Throw=[[1d20 + @{constitution_mod}]]}}">
+							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Constitution Saving Throw=[[1d20 + @{constitution_save}]]}}">
 							CON </button>
 						</li>
 						<li>
@@ -149,9 +150,9 @@
 								value="1"
 								class="has_proficiency"/>
 							<input type="number" name="attr_intelligence_save" class="stat_field"
-							value="@{intelligence_mod} + @{intelligence_save_proficiency}*3"
+							value="@{intelligence_mod} + @{intelligence_save_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/>
-							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Intelligence Saving Throw=[[1d20 + @{intelligence_mod}]]}}">
+							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Intelligence Saving Throw=[[1d20 + @{intelligence_save}]]}}">
 							INT </button>
 						</li>
 						<li>
@@ -159,9 +160,9 @@
 								value="1"
 								class="has_proficiency"/>
 							<input type="number" name="attr_wisdom_save" class="stat_field"
-							value="@{wisdom_mod} + @{wisdom_save_proficiency}*3"
+							value="@{wisdom_mod} + @{wisdom_save_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/>
-							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Wisdom Saving Throw=[[1d20 + @{wisdom_mod}]]}}">
+							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Wisdom Saving Throw=[[1d20 + @{wisdom_save}]]}}">
 							WIS </button>
 						</li>
 						<li>
@@ -169,7 +170,7 @@
 								value="1"
 								class="has_proficiency"/>
 							<input type="number" name="attr_charisma_save" class="stat_field"
-							value="@{charisma_mod} + @{charisma_save_proficiency}*3"
+							value="@{charisma_mod} + @{charisma_save_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Charisma Saving Throw=[[1d20 + @{charisma_save}]]}}">
 							CHR </button>
@@ -178,16 +179,16 @@
 			</tr>
 			<tr>
 				<td class="saving_throws_and_skills">
-					<h4>
+					<h3>
 						Skills
-					</h4>
+					</h3>
 					<ul>
 						<li>
 							<input type="checkbox" name="attr_acrobatics_proficiency"
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_acrobatics_mod"
 							class="stat_field"
-							value="@{dexterity_mod} + @{acrobatics_proficiency}*3"
+							value="@{dexterity_mod} + @{acrobatics_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Acrobatics Check =[[1d20 + @{acrobatics_mod}]]}}">
 							Acrobatics (Dex) </button>
@@ -197,7 +198,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_animal_handling_mod"
 							class="stat_field"
-							value="@{wisdom_mod} + @{animal_handling_proficiency}*3"
+							value="@{wisdom_mod} + @{animal_handling_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Animals Check =[[1d20 + @{animal_handling_mod}]]}}">
 							Animals (Wis) </button>
@@ -207,7 +208,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_athletics_mod"
 							class="stat_field"
-							value="@{strength_mod} + @{athletics_proficiency}*3"
+							value="@{strength_mod} + @{athletics_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Athletics Check =[[1d20 + @{athletics_mod}]]}}">
 							Athletics (Str)</button>
@@ -217,7 +218,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_computer_use_mod"
 							class="stat_field"
-							value="@{intelligence_mod} + @{computer_use_proficiency}*3"
+							value="@{intelligence_mod} + @{computer_use_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Computer Use Check =[[1d20 + @{computer_use_mod}]]}}">
 							Computers (Int) </button>
@@ -227,7 +228,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_deception_mod"
 							class="stat_field"
-							value="@{charisma_mod} + @{deception_proficiency}*3"
+							value="@{charisma_mod} + @{deception_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Deception Check =[[1d20 + @{deception_mod}]]}}">
 							Deception (Chr) </button>
@@ -237,7 +238,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_demolitions_mod"
 							class="stat_field"
-							value="@{intelligence_mod} + @{demolitions_proficiency}*3"
+							value="@{intelligence_mod} + @{demolitions_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Demolitions Check =[[1d20 + @{demolitions_mod}]]}}">
 							Demolitions (Int) </button>
@@ -247,7 +248,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_engineering_mod"
 							class="stat_field"
-							value="@{intelligence_mod} + @{engineering_proficiency}*3"
+							value="@{intelligence_mod} + @{engineering_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Engineering Check =[[1d20 + @{engineering_mod}]]}}">
 							Engineering (Int) </button>
@@ -257,7 +258,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_history_mod"
 							class="stat_field"
-							value="@{intelligence_mod} + @{history_proficiency}*3"
+							value="@{intelligence_mod} + @{history_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{History Check =[[1d20 + @{history_mod}]]}}">
 							History (Int) </button>
@@ -267,7 +268,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_insight_mod"
 							class="stat_field"
-							value="@{wisdom_mod} + @{insight_proficiency}*3"
+							value="@{wisdom_mod} + @{insight_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Insight Check =[[1d20 + @{insight_mod}]]}}">
 							Insight (Wis) </button>
@@ -277,7 +278,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_intimidation_mod"
 							class="stat_field"
-							value="@{charisma_mod} + @{intimidation_proficiency}*3"
+							value="@{charisma_mod} + @{intimidation_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Intimidation Check =[[1d20 + @{intimidation_mod}]]}}">
 							Intimidation (Chr) </button>
@@ -287,7 +288,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_investigation_mod"
 							class="stat_field"
-							value="@{intelligence_mod} + @{investigation_proficiency}*3"
+							value="@{intelligence_mod} + @{investigation_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Investigation Check =[[1d20 + @{investigation_mod}]]}}">
 							Investigation (Int) </button>
@@ -297,7 +298,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_medicine_mod"
 							class="stat_field"
-							value="@{intelligence_mod} + @{medicine_proficiency}*3"
+							value="@{intelligence_mod} + @{medicine_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Medicine Check =[[1d20 + @{medicine_mod}]]}}">
 							Medicine (Wis) </button>
@@ -307,7 +308,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_nature_mod"
 							class="stat_field"
-							value="@{intelligence_mod} + @{nature_proficiency}*3"
+							value="@{intelligence_mod} + @{nature_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Nature Check =[[1d20 + @{nature_mod}]]}}">
 							Nature (Int) </button>
@@ -317,7 +318,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_perception_mod"
 							class="stat_field"
-							value="@{wisdom_mod} + @{perception_proficiency}*3"
+							value="@{wisdom_mod} + @{perception_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Perception Check =[[1d20 + @{perception_mod}]]}}">
 							Perception (Wis) </button>
@@ -327,7 +328,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_performance_mod"
 							class="stat_field"
-							value="@{charisma_mod} + @{performance_proficiency}*3"
+							value="@{charisma_mod} + @{performance_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Performance Check =[[1d20 + @{performance_mod}]]}}">
 							Performance (Chr) </button>
@@ -337,7 +338,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_persuasion_mod"
 							class="stat_field"
-							value="@{charisma_mod} + @{persuasion_proficiency}*3"
+							value="@{charisma_mod} + @{persuasion_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Persuasion Check =[[1d20 + @{persuasion_mod}]]}}">
 							Persuasion (Chr) </button>
@@ -347,7 +348,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_sciences_mod"
 							class="stat_field"
-							value="@{intelligence_mod} + @{sciences_proficiency}*3"
+							value="@{intelligence_mod} + @{sciences_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Sciences Check =[[1d20 + @{sciences_mod}]]}}">
 							Sciences (Int) </button>
@@ -357,7 +358,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_sleight_of_hand_mod"
 							class="stat_field"
-							value="@{dexterity_mod} + @{sleight_of_hand_proficiency}*3"
+							value="@{dexterity_mod} + @{sleight_of_hand_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Sleight of Hand Check =[[1d20 + @{sleight_of_hand_mod}]]}}">
 							S.o.H (Dex) </button>
@@ -367,7 +368,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_stealth_mod"
 							class="stat_field"
-							value="@{dexterity_mod} + @{stealth_proficiency}*3"
+							value="@{dexterity_mod} + @{stealth_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Stealth Check =[[1d20 + @{stealth_mod}]]}}">
 							Stealth (Dex) </button>
@@ -377,7 +378,7 @@
 								value="1" class="has_proficiency"/>
 							<input type="number" name="attr_survival_mod"
 							class="stat_field"
-							value="@{wisdom_mod} + @{survival_proficiency}*3"
+							value="@{wisdom_mod} + @{survival_proficiency}*@{proficiency_bonus}"
 								 disabled="true"/><br>
 							<button type="roll" class="check" value="&{template:default} {{name=@{character_name}}} {{Survival Check =[[1d20 + @{survival_mod}]]}}">
 							Survival (Wis) </button>
@@ -385,6 +386,239 @@
 					</ul>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					<div class="passive_perception">
+							Passive Perception:
+						<input type="number" name="attr_passive_perception"
+						class="stat_field" value="10 + @{perception_mod}"
+						disabled="true" />
+					</div>
+				</td>
+			</tr>
 		</table>
 	</div>
+	<table class="initiative_armour_speed_prof">
+		<tr>
+			<td class="initiative_armour_speed_prof">
+				<input type="number" name="attr_proficiency_bonus"
+				class="initiative_armour_speed_prof_field"/>
+				<h4>
+					Proficiency
+				</h4>
+			</td>
+			<td class="initiative_armour_speed_prof">
+				<input type="number" name="attr_armour_class"
+				class="initiative_armour_speed_prof_field"/>
+				<h4>
+					AC
+				</h4>
+			</td>
+			<td class="initiative_armour_speed_prof">
+				<input type="number" name="attr_speed"
+				class="initiative_armour_speed_prof_field"/>
+				<h4>
+					Speed
+				</h4>
+			</td>
+			<td class="initiative_armour_speed_prof">
+				<input type="number" name="attr_initiative"
+				class="initiative_armour_speed_prof_field"/>
+				<br>
+				<button type="roll" class="initiative"
+					value="&{template:default} {{name=@{character_name}}} {{Initiative Roll=[[1d20 + @{initiative}]]}}">
+					Initiative
+				</button>
+			</td>
+		</tr>
+		<tr>
+			<td class="info_td">
+				<input type="text" name="attr_inspiration"
+				class="initiative_armour_speed_prof_field"/>
+				<h4>
+					Inspiration
+				</h4>
+			</td>
+			<td class="info_td"">
+				<h4>
+					Hit Dice: <input type="text" name="attr_hit_dice"
+						class="initiative_armour_speed_prof_field"/>
+				</h4>
+				Max: <br><input type="number" name="attr_max_hit_dice"
+					value="@{level}" class="initiative_armour_speed_prof_field"
+						disabled="true"/><br>
+				Current:<br> <input type="number" name="attr_current_hit_dice"
+				class="initiative_armour_speed_prof_field"/>
+			</td>
+			<td colspan="2" class="info_td">
+				<h2>
+					Death Saves
+				</h2>
+				Saves:
+				<input type="checkbox" name="attr_success1"/>
+				<input type="checkbox" name="attr_success2"/>
+				<input type="checkbox" name="attr_success3"/><br>
+				Failures:
+				<input type="checkbox" name="attr_failure1"/>
+				<input type="checkbox" name="attr_failure2"/>
+				<input type="checkbox" name="attr_failure3"/>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="info_td">
+				<h2>
+					HP
+				</h2><input type="number" name="attr_current_hp"
+				class="initiative_armour_speed_prof_field"/> /
+				<input type="number" name="attr_max_hp"
+				class="initiative_armour_speed_prof_field"/>
+			</td>
+			<td colspan="2" class="info_td">
+				<h2>
+					Temp HP: <input type="number" name="attr_temp_hp"
+						class="initiative_armour_speed_prof_field"/>
+				</h2>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" class="form_table">
+				<h2>
+					Attacks
+				</h2>
+				<table class="form_table">
+					<tr>
+							<input type="text" class="weapon_title"
+								name="attr_name_weapon1" value="Weapon 1"/>
+					</tr>
+					<tr>
+						<td>
+							Ability Mod:
+							<select name="attr_ability_weapon1">
+								<option value="strength">Strength</option>
+								<option value="dexterity">Dexterity</option>
+								<option value="constitution">Constitution</option>
+								<option value="intelligence">Intelligence</option>
+								<option value="wisdom">Wisdom</option>
+								<option value="charisma">Charisma</option>
+							</select>
+						</td>
+						<td>
+							Proficient: <input type="checkbox"
+								name="attr_proficient_weapon1"/>
+						</td>
+						<td>
+							Misc Atk Mod: <input type="number"
+								name="attr_misc_atk_mod_weapon1"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							Dmg Dice: <input type="text"
+									name="attr_damage_dice_weapon1"/>
+						</td>
+						<td>
+							Misc Dmg Mod: <input type="number"
+								name="attr_misc_dmg_mod_weapon1"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							Ammo (If applicable): <input type="number"
+								name="attr_current_ammo_weapon1"/> / <input type="number"
+									name="attr_max_ammo_weapon1"/>
+						</td>
+						<td>
+							<button type="roll" name="attr_attackweapon1"
+								value="&{template:default} {{name=@{character_name}}} {{Attack Roll = [[1d20]]}} {{Damage Roll = [[1d6]]}}"
+									class="attack_button"> BANG! </button>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 </div>
+
+<script type="text/worker">
+	// When stats are changed
+	on("change:strength", function() {
+		getAttrs(["strength"], function(values) {
+			let strength_mod = Math.floor((values.strength - 10)/2);
+			setAttrs({"strength_mod": strength_mod});
+		});
+	});
+
+	on("change:dexterity", function() {
+		getAttrs(["dexterity"], function(values) {
+			let dexterity_mod = Math.floor((values.dexterity - 10)/2);
+			setAttrs({"dexterity_mod": dexterity_mod, "initiative": dexterity_mod});
+		});
+	});
+
+	on("change:constitution", function() {
+		getAttrs(["constitution"], function(values) {
+			let constitution_mod = Math.floor((values.constitution - 10)/2);
+			setAttrs({"constitution_mod": constitution_mod});
+		});
+	});
+
+	on("change:intelligence", function() {
+		getAttrs(["intelligence"], function(values) {
+			let intelligence_mod = Math.floor((values.intelligence - 10)/2);
+			setAttrs({"intelligence_mod": intelligence_mod});
+		});
+	});
+
+	on("change:wisdom", function() {
+		getAttrs(["wisdom"], function(values) {
+			let wisdom_mod = Math.floor((values.wisdom - 10)/2);
+			setAttrs({"wisdom_mod": wisdom_mod});
+		});
+	});
+
+	on("change:charisma", function() {
+		getAttrs(["charisma"], function(values) {
+			let charisma_mod = Math.floor((values.charisma - 10)/2);
+			setAttrs({"charisma_mod": charisma_mod});
+		});
+	});
+
+// Attack rolls
+	on("change:ability_weapon1 change:proficient_weapon1 change:misc_atk_mod_weapon1 change:damage_dice_weapon1 change:misc_dmg_mod_weapon1 change:current_ammo_weapon1 change:max_ammo_weapon1", function() {
+		getAttrs(["proficiency_bonus",
+							"strength_mod",
+							"dexterity_mod",
+							"constitution_mod",
+							"intelligence_mod",
+							"charisma_mod",
+							"wisdom_mod",
+							"ability_weapon1",
+							"proficient_weapon1",
+							"misc_atk_mod_weapon1",
+							"damage_dice_weapon1",
+							"misc_dmg_mod_weapon1",
+							"current_ammo_weapon1",
+							"max_ammo_weapon1"], function(values) {
+							let attackAbilityBonus;
+							if (values.ability_weapon1 == "strength") {
+								attackAbilityBonus = values.strength_mod;
+							} else if (values.ability_weapon1 == "dexterity") {
+								attackAbilityBonus = values.dexterity_mod;
+							} else if (values.ability_weapon1 == "constitution") {
+								attackAbilityBonus = values.constitution_mod;
+							}	else if (values.ability_weapon1 == "intelligence") {
+								attackAbilityBonus = values.intelligence_mod;
+							} else if (values.ability_weapon1 == "wisdom") {
+								attackAbilityBonus = values.wisdom_mod;
+							} else if (values.ability_weapon1 == "charisma") {
+								attackAbilityBonus = values.charisma_mod;
+							}
+							let attackProficiencyBonus = (values.proficient_weapon1 == 0) ? 0 : values.proficiency_bonus;
+							let attackMiscBonus = values.misc_atk_mod_weapon1;
+							let damageDice = values.damage_dice_weapon1;
+							let damageMiscBonus = values.misc_dmg_mod_weapon1;
+							setAttrs({"attackweapon1": "&{template:default} {{Attack Roll=[[1d20+"+attackAbilityBonus+"+"+attackProficiencyBonus+"+"+attackMiscBonus+"]]}} {{Damage Roll=[["+damageDice+"+"+attackAbilityBonus+"+"+damageMiscBonus+"]]}}"});
+		});
+	});
+
+</script>
