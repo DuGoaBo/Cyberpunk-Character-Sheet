@@ -15,9 +15,6 @@ table {
 	border-spacing: 15px 15px;
 }
 
-tr {
-}
-
 td {
 	font-size: 15px;
 }
@@ -191,19 +188,19 @@ td.sheet-info_td {
 	padding: 10px;
 }
 
-td.sheet-form_table {
+td.sheet-formtable {
 	border: double black;
 	background-color: lightgrey;
 }
 
-input.sheet-weapon_title {
+input.sheet-weapontitle {
 	width: 100%;
 	border-bottom: 2px solid black;
 	font-size: 18px;
 	text-align: center
 }
 
-table.sheet-form_table {
+table.sheet-formtable {
 	border-collapse: separate;
 	border-spacing: 20px 3px;
 }
@@ -213,12 +210,12 @@ select {
 	padding: none;
 }
 
-button.sheet-attack_button::before {
+button.sheet-attackbutton::before {
 	font-family: "dicefontd20";
 	content: "D";
 }
 
-button.sheet-attack_button {
+button.sheet-attackbutton {
 	min-width: 30px;
 	min-height: 30px;
 	border: 2px solid red;

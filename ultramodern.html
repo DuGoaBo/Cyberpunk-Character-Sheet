@@ -391,8 +391,7 @@
 					<div class="passive_perception">
 							Passive Perception:
 						<input type="number" name="attr_passive_perception"
-						class="stat_field" value="10 + @{perception_mod}"
-						disabled="true" />
+						class="stat_field" value="10 + @{perception_mod}"/>
 					</div>
 				</td>
 			</tr>
@@ -481,59 +480,61 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="4" class="form_table">
+			<td colspan="4" class="formtable">
 				<h2>
 					Attacks
 				</h2>
-				<table class="form_table">
-					<tr>
-							<input type="text" class="weapon_title"
-								name="attr_name_weapon1" value="Weapon 1"/>
-					</tr>
-					<tr>
-						<td>
-							Ability Mod:
-							<select name="attr_ability_weapon1">
-								<option value="strength">Strength</option>
-								<option value="dexterity">Dexterity</option>
-								<option value="constitution">Constitution</option>
-								<option value="intelligence">Intelligence</option>
-								<option value="wisdom">Wisdom</option>
-								<option value="charisma">Charisma</option>
-							</select>
-						</td>
-						<td>
-							Proficient: <input type="checkbox"
-								name="attr_proficient_weapon1"/>
-						</td>
-						<td>
-							Misc Atk Mod: <input type="number"
-								name="attr_misc_atk_mod_weapon1"/>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							Dmg Dice: <input type="text"
-									name="attr_damage_dice_weapon1"/>
-						</td>
-						<td>
-							Misc Dmg Mod: <input type="number"
-								name="attr_misc_dmg_mod_weapon1"/>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							Ammo (If applicable): <input type="number"
-								name="attr_current_ammo_weapon1"/> / <input type="number"
-									name="attr_max_ammo_weapon1"/>
-						</td>
-						<td>
-							<button type="roll" name="attr_attackweapon1"
-								value="&{template:default} {{name=@{character_name}}} {{Attack Roll = [[1d20]]}} {{Damage Roll = [[1d6]]}}"
-									class="attack_button"> BANG! </button>
-						</td>
-					</tr>
-				</table>
+				<fieldset class="repeating_attacks">
+					<table class="formtable">
+						<tr>
+								<input type="text" class="weapontitle"
+									name="attr_nameweapon" value="Weapon"/>
+						</tr>
+						<tr>
+							<td>
+								Ability Mod:
+								<select name="attr_ability_weapon">
+									<option value="strength">Strength</option>
+									<option value="dexterity">Dexterity</option>
+									<option value="constitution">Constitution</option>
+									<option value="intelligence">Intelligence</option>
+									<option value="wisdom">Wisdom</option>
+									<option value="charisma">Charisma</option>
+								</select>
+							</td>
+							<td>
+								Proficient: <input type="checkbox"
+									name="attr_proficient_weapon"/>
+							</td>
+							<td>
+								Misc Atk Mod: <input type="number" value="0"
+									name="attr_misc_atk_mod_weapon"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								Dmg Dice: <input type="text" value="1d6"
+										name="attr_damage_dice_weapon"/>
+							</td>
+							<td>
+								Misc Dmg Mod: <input type="number" value="0"
+									name="attr_misc_dmg_mod_weapon"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								Ammo (If applicable): <input type="number"
+									name="attr_current_ammo_weapon"/> / <input type="number"
+										name="attr_max_ammo_weapon"/>
+							</td>
+							<td>
+								<button type="roll" name="attr_attack_weapon"
+									value="&{template:default}"
+										class="attackbutton"> BANG! </button>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
 			</td>
 		</tr>
 	</table>
@@ -584,40 +585,51 @@
 	});
 
 // Attack rolls
-	on("change:ability_weapon1 change:proficient_weapon1 change:misc_atk_mod_weapon1 change:damage_dice_weapon1 change:misc_dmg_mod_weapon1 change:current_ammo_weapon1 change:max_ammo_weapon1", function() {
-		getAttrs(["proficiency_bonus",
-							"strength_mod",
+	on("change:repeating_attacks:ability_weapon change:repeating_attacks:proficient_weapon change:repeating_attacks:misc_atk_mod_weapon change:repeating_attacks:damage_dice_weapon change:repeating_attacks:misc_dmg_mod_weapon change:repeating_attacks:current_ammo_weapon change:repeating_attacks:max_ammo_weapon", function() {
+		getAttrs(["strength_mod",
 							"dexterity_mod",
 							"constitution_mod",
 							"intelligence_mod",
 							"charisma_mod",
 							"wisdom_mod",
-							"ability_weapon1",
-							"proficient_weapon1",
-							"misc_atk_mod_weapon1",
-							"damage_dice_weapon1",
-							"misc_dmg_mod_weapon1",
-							"current_ammo_weapon1",
-							"max_ammo_weapon1"], function(values) {
+							"proficiency_bonus",
+							"character_name",
+							"repeating_attacks_ability_weapon",
+							"repeating_attacks_proficient_weapon",
+							"repeating_attacks_misc_atk_mod_weapon",
+							"repeating_attacks_damage_dice_weapon",
+							"repeating_attacks_misc_dmg_mod_weapon",
+							"repeating_attacks_current_ammo_weapon",
+							"repeating_attacks_max_ammo_weapon",
+							"repeating_attacks_attack_weapon"
+							], function(values) {
 							let attackAbilityBonus;
-							if (values.ability_weapon1 == "strength") {
+							if (values.repeating_attacks_ability_weapon == "strength") {
+								console.log("here");
 								attackAbilityBonus = values.strength_mod;
-							} else if (values.ability_weapon1 == "dexterity") {
+							} else if (values.repeating_attacks_ability_weapon == "dexterity") {
 								attackAbilityBonus = values.dexterity_mod;
-							} else if (values.ability_weapon1 == "constitution") {
+							} else if (values.repeating_attacks_ability_weapon == "constitution") {
 								attackAbilityBonus = values.constitution_mod;
-							}	else if (values.ability_weapon1 == "intelligence") {
+							}	else if (values.repeating_attacks_ability_weapon == "intelligence") {
 								attackAbilityBonus = values.intelligence_mod;
-							} else if (values.ability_weapon1 == "wisdom") {
+							} else if (values.repeating_attacks_ability_weapon == "wisdom") {
 								attackAbilityBonus = values.wisdom_mod;
-							} else if (values.ability_weapon1 == "charisma") {
+							} else if (values.repeating_attacks_ability_weapon == "charisma") {
 								attackAbilityBonus = values.charisma_mod;
 							}
-							let attackProficiencyBonus = (values.proficient_weapon1 == 0) ? 0 : values.proficiency_bonus;
-							let attackMiscBonus = values.misc_atk_mod_weapon1;
-							let damageDice = values.damage_dice_weapon1;
-							let damageMiscBonus = values.misc_dmg_mod_weapon1;
-							setAttrs({"attackweapon1": "&{template:default} {{Attack Roll=[[1d20+"+attackAbilityBonus+"+"+attackProficiencyBonus+"+"+attackMiscBonus+"]]}} {{Damage Roll=[["+damageDice+"+"+attackAbilityBonus+"+"+damageMiscBonus+"]]}}"});
+							let attackProficiencyBonus;
+							if (values.repeating_attacks_proficient_weapon == 0) {
+								attackProficiencyBonus = 0;
+							} else {
+								attackProficiencyBonus = values.proficiency_bonus;
+							}
+							console.log(attackAbilityBonus);
+							let attackMiscBonus = values.repeating_attacks_misc_atk_mod_weapon;
+							let damageDice = values.repeating_attacks_damage_dice_weapon;
+							let damageMiscBonus = values.repeating_attacks_misc_dmg_mod_weapon;
+							setAttrs({"repeating_attacks_attack_weapon": "&{template:default} {{name="+values.character_name+"}} {{Attack Roll=[[1d20+"+attackAbilityBonus+"+"
+							+attackProficiencyBonus+"+"+attackMiscBonus+"]]}} {{Damage Roll=[["+damageDice+"+"+attackAbilityBonus+"+"+damageMiscBonus+"]]}}"});
 		});
 	});
 
