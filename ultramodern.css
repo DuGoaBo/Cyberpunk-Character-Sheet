@@ -37,44 +37,6 @@ td.sheet-definers {
 	text-align: center;
 }
 
-div.sheet-sec {
-	font: 15px;
-	background-color: lightgrey;
-	border-style: double;
-	border-color: black;
-	text-align: center;
-}
-
-div.sheet-sec-name-column {
-	float: left;
-	font: 13px;
-	background-color: lightgrey;
-	border-style: double;
-	border-color: black;
-	text-align: center;
-	min-height: 130px;
-}
-
-div.sheet-sec-definer-column {
-	float: right;
-	font: 15px;
-	background-color: lightgrey;
-	border-style: double;
-	border-color: black;
-	text-align: center;
-	min-height: 150px;
-	max-width: 640px
-}
-
-div.sheet-sec-column {
-	float: left;
-	font: 15px;
-	background-color: lightgrey;
-	border-style: double;
-	border-color: black;
-	text-align: center;
-}
-
 input.sheet-name_field {
 	text-align: center;
 	font-family: 'Audiowide';
@@ -93,7 +55,8 @@ input.sheet-text_field {
 	outline: none;
 	background: white;
 	font-size: 18px;
-	max-width: 180px
+	max-width: 200px;
+	padding: 5px
 }
 
 table.sheet-stats {
@@ -238,4 +201,21 @@ button.sheet-attackbutton {
 	min-height: 30px;
 	border: 2px solid red;
 	font-family: "Audiowide";
+}
+
+div.sheet-resource {
+	text-align: center;
+	font-size: 20px;
+}
+
+td.sheet-features_and_traits_text {
+	font-size: 18px
+}
+
+div.sheet-equipment {
+	font-size: 18px
+}
+
+textarea {
+	max-width: 500px
 }

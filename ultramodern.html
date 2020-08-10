@@ -522,10 +522,20 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3">
+						<td colspan="2">
 							Ammo (If applicable): <input type="number"
 								name="attr_current_ammo_weapon"/> / <input type="number"
 									name="attr_max_ammo_weapon"/>
+						</td>
+						<td colspan="2">
+							Slot Level (If applicable): <input type="number" name="attr_slot_level_weapon"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							Description:
+							<textarea name="attr_description_weapon">
+							</textarea>
 						</td>
 						<td>
 							<button type="roll" name="attr_attack_weapon"
@@ -534,6 +544,84 @@
 						</td>
 					</tr>
 				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" class="formtable">
+			<h2>
+				Resources
+			</h2>
+			<fieldset class="repeating_resources">
+				<div class="resource">
+					Name: <input type="text" name="attr_name_resource"
+						class = "text_field"/>
+					Current: <input type="number" name="attr_current_resource"
+						class = "initiative_armour_speed_prof_field"/>
+					Max: <input type="number" name="attr_max_resource"
+						class = "initiative_armour_speed_prof_field"/>
+				</div>
+			</fieldset>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" class="formtable">
+			<h2>
+				Features and Traits
+			</h2>
+			<fieldset class="repeating_resources">
+				<table>
+					<tr>
+						<td colspan="2" class="features_and_traits_text">
+							Name: <input type="text" name="attr_name_feature"
+								class = "text_field"/>
+						</td>
+						<td colspan="2" class="features_and_traits_text">
+							Source/Level:
+							</h2>
+							<input type="text" name="attr_source_feature"
+								class = "text_field"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" class="features_and_traits_text">
+							Description:	<textarea name="attr_description_feature">
+							</textarea>
+							<button type="roll" name="attr_describe_feature">
+								?
+							</button>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" class="formtable">
+			<h2>
+				Equipment
+			</h2>
+			<fieldset class="repeating_equipment">
+					<div class="equipment">
+					Name: <input type="text" name="attr_name_equipment"
+						class = "text_field"/><br>
+					Description:	<textarea name="attr_description_equipment">
+						</textarea>
+					<button type="roll" name="attr_describe_equipment">
+						?
+					</button>
+					</div>
+			</fieldset>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" class="formtable">
+			<h2>
+				Other Proficiencies
+			</h2>
+			<fieldset class="repeating_proficiencies">
+					Name: <input type="text" name="attr_proficiency"
+						class = "text_field"/>
 			</fieldset>
 		</td>
 	</tr>
@@ -585,7 +673,7 @@
 	});
 
 // Attack rolls
-	on("change:repeating_attacks:ability_weapon change:repeating_attacks:proficient_weapon change:repeating_attacks:misc_atk_mod_weapon change:repeating_attacks:damage_dice_weapon change:repeating_attacks:misc_dmg_mod_weapon change:repeating_attacks:current_ammo_weapon change:repeating_attacks:max_ammo_weapon", function() {
+	on("change:repeating_attacks:ability_weapon change:repeating_attacks:proficient_weapon change:repeating_attacks:misc_atk_mod_weapon change:repeating_attacks:damage_dice_weapon change:repeating_attacks:misc_dmg_mod_weapon change:repeating_attacks:current_ammo_weapon change:repeating_attacks:max_ammo_weapon change:repeating_attacks:description_weapon change:repeating_attacks:slot_level_weapon", function() {
 		getAttrs(["strength_mod",
 							"dexterity_mod",
 							"constitution_mod",
@@ -601,22 +689,29 @@
 							"repeating_attacks_misc_dmg_mod_weapon",
 							"repeating_attacks_current_ammo_weapon",
 							"repeating_attacks_max_ammo_weapon",
-							"repeating_attacks_attack_weapon"
+							"repeating_attacks_description_weapon",
+							"repeating_attacks_slot_level_weapon"
 							], function(values) {
 							let attackAbilityBonus;
-							if (values.repeating_attacks_ability_weapon == "strength") {
-								console.log("here");
-								attackAbilityBonus = values.strength_mod;
-							} else if (values.repeating_attacks_ability_weapon == "dexterity") {
-								attackAbilityBonus = values.dexterity_mod;
-							} else if (values.repeating_attacks_ability_weapon == "constitution") {
-								attackAbilityBonus = values.constitution_mod;
-							}	else if (values.repeating_attacks_ability_weapon == "intelligence") {
-								attackAbilityBonus = values.intelligence_mod;
-							} else if (values.repeating_attacks_ability_weapon == "wisdom") {
-								attackAbilityBonus = values.wisdom_mod;
-							} else if (values.repeating_attacks_ability_weapon == "charisma") {
-								attackAbilityBonus = values.charisma_mod;
+							switch(values.repeating_attacks_ability_weapon) {
+								case "strength":
+									attackAbilityBonus = values.strength_mod;
+									break;
+								case "dexterity":
+									attackAbilityBonus = values.dexterity_mod;
+									break;
+								case "constitution":
+									attackAbilityBonus = values.constitution_mod;
+									break;
+								case "intelligence":
+									attackAbilityBonus = values.intelligence_mod;
+									break;
+								case "wisdom":
+									attackAbilityBonus = values.wisdom_mod;
+									break;
+								case "charisma":
+									attackAbilityBonus = values.charisma_mod;
+									break;
 							}
 							let attackProficiencyBonus;
 							if (values.repeating_attacks_proficient_weapon == 0) {
@@ -624,13 +719,36 @@
 							} else {
 								attackProficiencyBonus = values.proficiency_bonus;
 							}
-							console.log(attackAbilityBonus);
 							let attackMiscBonus = values.repeating_attacks_misc_atk_mod_weapon;
 							let damageDice = values.repeating_attacks_damage_dice_weapon;
 							let damageMiscBonus = values.repeating_attacks_misc_dmg_mod_weapon;
-							setAttrs({"repeating_attacks_attack_weapon": "&{template:default} {{name="+values.character_name+"}} {{Attack Roll=[[1d20+"+attackAbilityBonus+"+"
-							+attackProficiencyBonus+"+"+attackMiscBonus+"]]}} {{Damage Roll=[["+damageDice+"+"+attackAbilityBonus+"+"+damageMiscBonus+"]]}}"});
-		});
+							let newTemplate = "&{template:default} {{name="+values.character_name+"}} {{Attack Roll=[[1d20+"+attackAbilityBonus+"+"
+							+attackProficiencyBonus+"+"+attackMiscBonus+"]]}} {{Damage Roll=[["+damageDice+"+"+attackAbilityBonus+"+"+damageMiscBonus+"]]}}"
+							if (values.repeating_attacks_description_weapon.trim().length != 0) { //check if the string is all whitespace or empty
+								newTemplate += " {{Description="+values.repeating_attacks_description_weapon+"}}";
+							}
+							if (values.repeating_attacks_slot_level_weapon) {
+								newTemplate += " {{Slot Level="+values.repeating_attacks_slot_level_weapon+"}}";
+							}
+							setAttrs({"repeating_attacks_attack_weapon": newTemplate});
+			});
+	});
+
+	on("change:repeating_features:name_feature change:repeating_features:source_feature change:repeating_features:description_feature", function () {
+		getAttrs(["repeating_features_name_feature",
+							"repeating_features_source_feature",
+							"repeating_features_description_feature"], function(values) {
+								setAttrs({"repeating_features_describe_feature": "&{template:default} {{name="+values.repeating_features_name_feature+"}} {{Description="
+								+values.repeating_features_description_feature+"}}"});
+			});
+	});
+
+	on("change:repeating_equipment:name_equipment change:repeating_equipment:description_equipment", function () {
+		getAttrs(["repeating_equipment_name_equipment",
+							"repeating_equipment_description_equipment"], function(values) {
+								setAttrs({"repeating_equipment_describe_equipment": "&{template:default} {{name="+values.repeating_equipment_name_equipment
+								+ "}} {{Description="+ values.repeating_equipment_description_equipment + "}}"});
+			});
 	});
 
 </script>
