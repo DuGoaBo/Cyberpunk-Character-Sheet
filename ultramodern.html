@@ -569,7 +569,7 @@
 			<h2>
 				Features and Traits
 			</h2>
-			<fieldset class="repeating_resources">
+			<fieldset class="repeating_features">
 				<table>
 					<tr>
 						<td colspan="2" class="features_and_traits_text">
@@ -738,6 +738,7 @@
 		getAttrs(["repeating_features_name_feature",
 							"repeating_features_source_feature",
 							"repeating_features_description_feature"], function(values) {
+								console.log("hello");
 								setAttrs({"repeating_features_describe_feature": "&{template:default} {{name="+values.repeating_features_name_feature+"}} {{Description="
 								+values.repeating_features_description_feature+"}}"});
 			});
