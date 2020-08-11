@@ -488,7 +488,7 @@
 				<table class="formtable">
 					<tr>
 							<input type="text" class="weapontitle"
-								name="attr_nameweapon" value="Weapon"/>
+								name="attr_name_weapon" value="Weapon"/>
 					</tr>
 					<tr>
 						<td>
@@ -682,7 +682,7 @@
 	});
 
 // Attack rolls
-	on("change:repeating_attacks:ability_weapon change:repeating_attacks:proficient_weapon change:repeating_attacks:misc_atk_mod_weapon change:repeating_attacks:damage_dice_weapon change:repeating_attacks:misc_dmg_mod_weapon change:repeating_attacks:current_ammo_weapon change:repeating_attacks:max_ammo_weapon change:repeating_attacks:description_weapon change:repeating_attacks:slot_level_weapon", function() {
+	on("change:repeating_attacks:name_weapon change:repeating_attacks:ability_weapon change:repeating_attacks:proficient_weapon change:repeating_attacks:misc_atk_mod_weapon change:repeating_attacks:damage_dice_weapon change:repeating_attacks:misc_dmg_mod_weapon change:repeating_attacks:current_ammo_weapon change:repeating_attacks:max_ammo_weapon change:repeating_attacks:description_weapon change:repeating_attacks:slot_level_weapon", function() {
 		getAttrs(["strength_mod",
 							"dexterity_mod",
 							"constitution_mod",
@@ -691,6 +691,7 @@
 							"wisdom_mod",
 							"proficiency_bonus",
 							"character_name",
+							"repeating_attacks_name_weapon",
 							"repeating_attacks_ability_weapon",
 							"repeating_attacks_proficient_weapon",
 							"repeating_attacks_misc_atk_mod_weapon",
@@ -731,7 +732,7 @@
 							let attackMiscBonus = values.repeating_attacks_misc_atk_mod_weapon;
 							let damageDice = values.repeating_attacks_damage_dice_weapon;
 							let damageMiscBonus = values.repeating_attacks_misc_dmg_mod_weapon;
-							let newTemplate = "&{template:default} {{name="+values.character_name+"}} {{Attack Roll=[[1d20+"+attackAbilityBonus+"+"
+							let newTemplate = "&{template:default} {{name="+values.repeating_attacks_name_weapon+"}} {{Attack Roll=[[1d20+"+attackAbilityBonus+"+"
 							+attackProficiencyBonus+"+"+attackMiscBonus+"]]}} {{Damage Roll=[["+damageDice+"+"+attackAbilityBonus+"+"+damageMiscBonus+"]]}}"
 							if (values.repeating_attacks_description_weapon.trim().length != 0) { //check if the string is all whitespace or empty
 								newTemplate += " {{Description="+values.repeating_attacks_description_weapon+"}}";
