@@ -689,10 +689,10 @@
 		});
 	});
 
-	on("change:wisdom change:proficiency_bonus", function() {
-		getAttrs(["wisdom", "proficiency_bonus"], function(values) {
+	on("change:wisdom change:perception_proficiency change:proficiency_bonus", function() {
+		getAttrs(["wisdom", "proficiency_bonus", "perception_proficiency"], function(values) {
 			let wisdom_mod = Math.floor((values.wisdom - 10)/2);
-			setAttrs({"wisdom_mod": wisdom_mod, "passive_perception": 10 + parseInt(values.proficiency_bonus) + wisdom_mod});
+			setAttrs({"wisdom_mod": wisdom_mod, "passive_perception": 10 + wisdom_mod + parseInt(values.perception_proficiency) * parseInt(values.proficiency_bonus)});
 		});
 	});
 
