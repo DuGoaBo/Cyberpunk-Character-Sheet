@@ -186,9 +186,21 @@ table.sheet-formtable {
 	border-spacing: 20px 3px;
 }
 
+div.sheet-weapon_row {
+	margin: 10px;
+}
+
+span.sheet-weapon_column {
+	margin-right: 10px;
+	margin-left: 20px
+}
+
+input.sheet-toggle_weapon:not(:checked) ~ span {
+	display: none;
+}
+
 select {
 	max-width: 120px;
-	padding: none;
 }
 
 button.sheet-attackbutton::before {
@@ -217,5 +229,5 @@ div.sheet-equipment {
 }
 
 textarea {
-	max-width: 500px
+	min-width: 80%;
 }

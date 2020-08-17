@@ -317,8 +317,8 @@
 					Nature (Int) </button>
 				</li>
 				<li>
-					<input type="checkbox" name="attr_perception_proficiency"
-						value="1" class="has_proficiency"/>
+					<input type="checkbox" name="attr_perception_proficiency" value="1"
+						class="has_proficiency"/>
 					<input type="number" name="attr_perception_mod"
 					class="stat_field"
 					value="@{wisdom_mod} + @{perception_proficiency}*@{proficiency_bonus}"
@@ -486,12 +486,14 @@
 			</h2>
 			<fieldset class="repeating_attacks">
 				<table class="formtable">
-					<tr>
+					<div class="weapon_row">
 							<input type="text" class="weapontitle"
-								name="attr_name_weapon" value="Weapon"/>
-					</tr>
-					<tr>
-						<td>
+								name="attr_name_weapon" value="Attack Name"/>
+					</div>
+					<div class="weapon_row">
+						Attack Roll:
+						<input type="checkbox" class="toggle_weapon" name="attr_attack_toggle_weapon" checked="true"/><br>
+						<span class="weapon_column">
 							Ability Mod:
 							<select name="attr_ability_weapon">
 								<option value="strength">Strength</option>
@@ -500,49 +502,71 @@
 								<option value="intelligence">Intelligence</option>
 								<option value="wisdom">Wisdom</option>
 								<option value="charisma">Charisma</option>
+								<option value="none">None</option>
 							</select>
-						</td>
-						<td>
+						</span>
+						<span class="weapon_column">
 							Proficient: <input type="checkbox"
 								name="attr_proficient_weapon"/>
-						</td>
-						<td>
+						</span>
+						<span class="weapon_column">
 							Misc Atk Mod: <input type="number" value="0"
 								name="attr_misc_atk_mod_weapon"/>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
+						</span>
+					</div>
+					<div class="weapon_row">
+						Damage Roll: <input type="checkbox" class="toggle_weapon"
+							name="attr_damage_toggle_weapon" checked="true"/><br>
+						<span class="weapon_column">
 							Dmg Dice: <input type="text" value="1d6"
 									name="attr_damage_dice_weapon"/>
-						</td>
-						<td>
+						</span>
+						<span class="weapon_column">
 							Misc Dmg Mod: <input type="number" value="0"
 								name="attr_misc_dmg_mod_weapon"/>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							Ammo (If applicable): <input type="number"
-								name="attr_current_ammo_weapon"/> / <input type="number"
-									name="attr_max_ammo_weapon"/>
-						</td>
-						<td colspan="2">
-							Slot Level (If applicable): <input type="number" name="attr_slot_level_weapon"/>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							Description:
-							<textarea name="attr_description_weapon">
-							</textarea>
-						</td>
-						<td>
+						</span>
+					</div>
+					<div class="weapon_row">
+						Saving Throw: <input type="checkbox"
+							class="toggle_weapon"
+								name="attr_saving_throw_toggle_weapon"/><br>
+						<span class="weapon_column">
+							DC: <input type="number" name="attr_saving_throw_dc_weapon"/>
+						</span>
+						<span class="weapon_column">
+							Type:
+							<select name="attr_saving_throw_type_weapon">
+								<option value="Strength">Strength</option>
+								<option value="Dexterity">Dexterity</option>
+								<option value="Constitution">Constitution</option>
+								<option value="Intelligence">Intelligence</option>
+								<option value="Wisdom">Wisdom</option>
+								<option value="Charisma">Charisma</option>
+							</select>
+						</span>
+					</div>
+					<div class="weapon_row">
+						Ammo: <input type="checkbox" class="toggle_weapon" checked/><br>
+						<span class="weapon_column">
+							Current: <input type="number" name="attr_current_ammo_weapon"/>
+						</span>
+						<span class="weapon_column">
+							Max: <input type="number" name="attr_max_ammo_weapon"/>
+						</span>
+					</div> <div class="weapon_row">
+						Slot Level: <input type="checkbox" class="toggle_weapon"
+							name="attr_slot_level_toggle_weapon"/><br>
+						<span class="weapon_column">
+							<input type="number" name="attr_slot_level_weapon"/>
+						</span>
+					</div>
+					<div class="weapon_row">
+						Description:<br>
+						<textarea name="attr_description_weapon"></textarea>
 							<button type="roll" name="attr_attack_weapon"
 								value="&{template:default}"
 									class="attackbutton"> BANG! </button>
-						</td>
-					</tr>
+					</div>
 				</table>
 			</fieldset>
 		</td>
@@ -585,8 +609,7 @@
 					</tr>
 					<tr>
 						<td colspan="4" class="features_and_traits_text">
-							Description:	<textarea name="attr_description_feature">
-							</textarea>
+							Description:	<textarea name="attr_description_feature"></textarea>
 							<button type="roll" name="attr_describe_feature">
 								?
 							</button>
@@ -610,9 +633,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td>
-								Description:	<textarea name="attr_description_equipment">
-									</textarea>
+							<td colspan="4">
+								Description:	<textarea name="attr_description_equipment"></textarea>
 								<button type="roll" name="attr_describe_equipment">
 									?
 								</button>
@@ -682,7 +704,7 @@
 	});
 
 // Attack rolls
-	on("change:repeating_attacks:name_weapon change:repeating_attacks:ability_weapon change:repeating_attacks:proficient_weapon change:repeating_attacks:misc_atk_mod_weapon change:repeating_attacks:damage_dice_weapon change:repeating_attacks:misc_dmg_mod_weapon change:repeating_attacks:current_ammo_weapon change:repeating_attacks:max_ammo_weapon change:repeating_attacks:description_weapon change:repeating_attacks:slot_level_weapon", function() {
+	on("change:repeating_attacks:name_weapon change:repeating_attacks:ability_weapon change:repeating_attacks:proficient_weapon change:repeating_attacks:misc_atk_mod_weapon change:repeating_attacks:damage_dice_weapon change:repeating_attacks:misc_dmg_mod_weapon change:repeating_attacks:current_ammo_weapon change:repeating_attacks:max_ammo_weapon change:repeating_attacks:description_weapon change:repeating_attacks:slot_level_weapon change:repeating_attacks:attack_toggle_weapon change:repeating_attacks:damage_toggle_weapon change:repeating_attacks:saving_throw_toggle_weapon change:repeating_attacks:slot_level_toggle_weapon change:repeating_attacks:saving_throw_dc_weapon change:repeating_attacks:saving_throw_type_weapon", function() {
 		getAttrs(["strength_mod",
 							"dexterity_mod",
 							"constitution_mod",
@@ -692,53 +714,77 @@
 							"proficiency_bonus",
 							"character_name",
 							"repeating_attacks_name_weapon",
+							"repeating_attacks_attack_toggle_weapon",
+							"repeating_attacks_damage_toggle_weapon",
+							"repeating_attacks_saving_throw_toggle_weapon",
+							"repeating_attacks_slot_level_toggle_weapon",
 							"repeating_attacks_ability_weapon",
 							"repeating_attacks_proficient_weapon",
 							"repeating_attacks_misc_atk_mod_weapon",
 							"repeating_attacks_damage_dice_weapon",
 							"repeating_attacks_misc_dmg_mod_weapon",
-							"repeating_attacks_current_ammo_weapon",
-							"repeating_attacks_max_ammo_weapon",
-							"repeating_attacks_description_weapon",
-							"repeating_attacks_slot_level_weapon"
+							"repeating_attacks_slot_level_weapon",
+							"repeating_attacks_saving_throw_dc_weapon",
+							"repeating_attacks_saving_throw_type_weapon",
+							"repeating_attacks_description_weapon"
 							], function(values) {
-							let attackAbilityBonus;
-							switch(values.repeating_attacks_ability_weapon) {
-								case "strength":
-									attackAbilityBonus = values.strength_mod;
-									break;
-								case "dexterity":
-									attackAbilityBonus = values.dexterity_mod;
-									break;
-								case "constitution":
-									attackAbilityBonus = values.constitution_mod;
-									break;
-								case "intelligence":
-									attackAbilityBonus = values.intelligence_mod;
-									break;
-								case "wisdom":
-									attackAbilityBonus = values.wisdom_mod;
-									break;
-								case "charisma":
-									attackAbilityBonus = values.charisma_mod;
-									break;
+							let newTemplate = "&{template:default} {{name="+values.repeating_attacks_name_weapon+"}}";
+							let attackAbilityBonus = 0;
+							if (values.repeating_attacks_attack_toggle_weapon != 0) {
+								// If the attack checkbox is ticked
+								switch(values.repeating_attacks_ability_weapon) {
+									case "strength":
+										attackAbilityBonus = values.strength_mod;
+										break;
+									case "dexterity":
+										attackAbilityBonus = values.dexterity_mod;
+										break;
+									case "constitution":
+										attackAbilityBonus = values.constitution_mod;
+										break;
+									case "intelligence":
+										attackAbilityBonus = values.intelligence_mod;
+										break;
+									case "wisdom":
+										attackAbilityBonus = values.wisdom_mod;
+										break;
+									case "charisma":
+										attackAbilityBonus = values.charisma_mod;
+										break;
+									case "none":
+										attackAbilityBonus = 0;
+										break;
+								}
+								let attackProficiencyBonus;
+								if (values.repeating_attacks_proficient_weapon == 0) {
+									attackProficiencyBonus = 0;
+								} else {
+									attackProficiencyBonus = values.proficiency_bonus;
+								}
+								let attackMiscBonus = values.repeating_attacks_misc_atk_mod_weapon;
+								newTemplate += "{{Attack Roll=[[1d20+"+attackAbilityBonus+"+"+attackProficiencyBonus+"+"+attackMiscBonus+"]]}}"
 							}
-							let attackProficiencyBonus;
-							if (values.repeating_attacks_proficient_weapon == 0) {
-								attackProficiencyBonus = 0;
-							} else {
-								attackProficiencyBonus = values.proficiency_bonus;
+
+							if (values.repeating_attacks_damage_toggle_weapon != 0) {
+								// If the damage checkbox is ticked
+								let damageDice = values.repeating_attacks_damage_dice_weapon;
+								let damageMiscBonus = values.repeating_attacks_misc_dmg_mod_weapon;
+								newTemplate += "{{Damage Roll=[["+damageDice+"+"+attackAbilityBonus+"+"+damageMiscBonus+"]]}}";
 							}
-							let attackMiscBonus = values.repeating_attacks_misc_atk_mod_weapon;
-							let damageDice = values.repeating_attacks_damage_dice_weapon;
-							let damageMiscBonus = values.repeating_attacks_misc_dmg_mod_weapon;
-							let newTemplate = "&{template:default} {{name="+values.repeating_attacks_name_weapon+"}} {{Attack Roll=[[1d20+"+attackAbilityBonus+"+"
-							+attackProficiencyBonus+"+"+attackMiscBonus+"]]}} {{Damage Roll=[["+damageDice+"+"+attackAbilityBonus+"+"+damageMiscBonus+"]]}}"
+
+							if (values.repeating_attacks_saving_throw_toggle_weapon != 0) {
+								let savingThrowDC = values.repeating_attacks_saving_throw_dc_weapon;
+								let saveType = values.repeating_attacks_saving_throw_type_weapon;
+								newTemplate += "{{Saving Throw=" + savingThrowDC + "DC " + saveType + " save}}";
+							}
+
+							if (values.repeating_attacks_slot_level_toggle_weapon != 0) {
+								let slotLevel = values.repeating_attacks_slot_level_weapon;
+								newTemplate += "{{Slot Level=" + slotLevel + "}}";
+							}
+
 							if (values.repeating_attacks_description_weapon.trim().length != 0) { //check if the string is all whitespace or empty
 								newTemplate += " {{Description="+values.repeating_attacks_description_weapon+"}}";
-							}
-							if (values.repeating_attacks_slot_level_weapon) {
-								newTemplate += " {{Slot Level="+values.repeating_attacks_slot_level_weapon+"}}";
 							}
 							setAttrs({"repeating_attacks_attack_weapon": newTemplate});
 			});
