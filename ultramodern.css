@@ -82,8 +82,21 @@ input.sheet-stat_field {
 	border: 1px solid black;
 	background: white;
 	font-size: 16px;
-	max-width: 50px;
-	padding: 3px
+}
+
+input.sheet-ability_score_field {
+	text-align: center;
+	font-size: 25px;
+	border: 2px solid black;
+	margin: 5px 0px;
+}
+
+input.sheet-ability_mod_display_field {
+	text-align: center;
+	border-radius: 50px;
+	border: 2px solid black;
+	font-size: 20px;
+	margin-bottom: 5px;
 }
 
 table.sheet-saving_throws_and_skills {
@@ -96,7 +109,7 @@ td.sheet-saving_throws_and_skills {
 	border-style: double;
 	border-color: black;
 	font-size: 18px;
-	min-width: 260px
+	min-width: 260px;
 }
 
 input[type="checkbox"] {

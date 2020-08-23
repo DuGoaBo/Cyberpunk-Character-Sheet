@@ -57,55 +57,55 @@
 <table class="stats">
 	<tr>
 		<td class="stats_block">
-			STR<br>
-			<input type="number" name="attr_strength" class="stat_field">
+			<button type="roll" value="&{template:default} {{name=@{character_name}}} {{Strength Check=[[1d20 + @{strength_mod}]]}}">STR</button><br>
+			<input type="number" name="attr_strength" class="ability_score_field">
 			</input><br>
 			<input type="number" name="attr_strength_mod_display"
-				value="@{strength_mod}" class="stat_field" disabled="true" />
+				value="@{strength_mod}" class="ability_mod_display_field" disabled="true" />
 		</td>
 	</tr>
 	<tr>
 		<td class="stats_block">
-			DEX<br>
-			<input type="number" name="attr_dexterity" class="stat_field">
+			<button type="roll" value="&{template:default} {{name=@{character_name}}} {{Dexterity Check=[[1d20 + @{dexterity_mod}]]}}">DEX</button><br>
+			<input type="number" name="attr_dexterity" class="ability_score_field">
 			</input><br>
-			<input type="number" name="attr_dexterity_mod_display" class="stat_field"
+			<input type="number" name="attr_dexterity_mod_display" class="ability_mod_display_field"
 			value="@{dexterity_mod}" disabled="true" />
 		</td>
 	</tr>
 	<tr>
 		<td class="stats_block">
-			CON<br>
-			<input type="number" name="attr_constitution" class="stat_field">
+			<button type="roll" value="&{template:default} {{name=@{character_name}}} {{Constitution Check=[[1d20 + @{constitution_mod}]]}}">CON</button><br>
+			<input type="number" name="attr_constitution" class="ability_score_field">
 			</input><br>
-			<input type="number" name="attr_constitution_mod_display" class="stat_field"
+			<input type="number" name="attr_constitution_mod_display" class="ability_mod_display_field"
 			value="@{constitution_mod}" disabled="true" />
 		</td>
 	</tr>
 	<tr>
 		<td class="stats_block">
-			INT<br>
-			<input type="number" name="attr_intelligence" class="stat_field">
+			<button type="roll" value="&{template:default} {{name=@{character_name}}} {{Intelligence Check=[[1d20 + @{intelligence_mod}]]}}">INT</button><br>
+			<input type="number" name="attr_intelligence" class="ability_score_field">
 			</input><br>
-			<input type="number" name="attr_intelligence_mod_display" class="stat_field"
+			<input type="number" name="attr_intelligence_mod_display" class="ability_mod_display_field"
 			value="@{intelligence_mod}" disabled="true" />
 		</td>
 	</tr>
 	<tr>
 		<td class="stats_block">
-			WIS<br>
-			<input type="number" name="attr_wisdom" class="stat_field">
+			<button type="roll" value="&{template:default} {{name=@{character_name}}} {{Wisdom Check=[[1d20 + @{wisdom_mod}]]}}">WIS</button><br>
+			<input type="number" name="attr_wisdom" class="ability_score_field">
 			</input><br>
-			<input type="number" name="attr_wisdom_mod_display" class="stat_field"
+			<input type="number" name="attr_wisdom_mod_display" class="ability_mod_display_field"
 			value="@{wisdom_mod}" disabled="true" />
 		</td>
 	</tr>
 	<tr>
 		<td class="stats_block">
-			CHR<br>
-			<input type="number" name="attr_charisma" class="stat_field">
+			<button type="roll" value="&{template:default} {{name=@{character_name}}} {{Charisma Check=[[1d20 + @{charisma_mod}]]}}">CHR</button><br>
+			<input type="number" name="attr_charisma" class="ability_score_field">
 			</input><br>
-			<input type="number" name="attr_charisma_mod_display" class="stat_field"
+			<input type="number" name="attr_charisma_mod_display" class="ability_mod_display_field"
 			value="@{charisma_mod}" disabled="true" />
 		</td>
 	</tr>
